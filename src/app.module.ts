@@ -10,17 +10,23 @@ const mockAppService = {
   // mock implementation
   property:"value"
 }
+
+// alias service
+const aliasAppProvider = {
+  provide:constants['alias'],
+  useExisting: AppService
+}
 // module object { inports,controllers,providers}
 @Module({
   imports: [],
   controllers: [AppController],
-  // providers: [AppService], // shorthand syntax
-  providers: [ 
-    {
-      provide:AppService,
-      useValue: mockAppService, // regular syntax
-    }
-  ]
+  providers: [AppService, aliasAppProvider], // shorthand syntax
+  // providers: [ 
+  //   {
+  //     provide:AppService,
+  //     useValue: mockAppService, // regular syntax
+  //   }
+  // ]
 })
 // export module
 export class AppModule {}

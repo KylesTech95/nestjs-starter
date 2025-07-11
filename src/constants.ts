@@ -3,4 +3,5 @@
 export const constants =  {
     connection: 'CONNECTION',
     test: 'TEST',
+    alias: 'ALIAS'
 }
