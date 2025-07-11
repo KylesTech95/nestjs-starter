@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
@@ -9,10 +10,12 @@ import * as hbs from 'express-handlebars';
 //   await app.listen(3000);
 // }
 async function bootstrap() {
+  // create app with nestfactory
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
   // set views
   app.setBaseViewsDir(join(__dirname,'..','views'))
   app.setViewEngine('hbs')
-  await app.listen(3000);
+  await app.listen(process.env.PORT||3000);
 }
 bootstrap();
