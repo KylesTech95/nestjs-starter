@@ -8,10 +8,10 @@ import { FlappyService } from './app.service';
 export class FlappyController {
 constructor(private readonly flappyService: FlappyService) {}
 
-@Get() // root
-root() {
-  return { message: 'Welcome to Flappybird!'}
-}
+// @Get() // root
+// root() {
+//   return { message: 'Welcome to Flappybird!'}
+// }
 
 @Get("/canvas-init")
 initializeCanvas() : string { 
