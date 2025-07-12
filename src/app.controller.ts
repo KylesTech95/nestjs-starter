@@ -3,8 +3,8 @@
 
 /*-------------------------------------------------------*/
 import { Controller, Get, Render, Req, Res, HttpStatus, Query } from '@nestjs/common';
-import {Response} from 'express'
-import { AppService } from './app.service';
+import {Response, Request} from 'express'
+import { AppService, FlappyService } from './app.service';
 
 @Controller()
 export class AppController {
@@ -13,7 +13,7 @@ export class AppController {
   @Get()
   // getHello fn
   getHello(): string {
-    console.log(this.appService)
+    // console.log(this.appService)
     //   AppService {
     //   discoveryService: DiscoveryService {
     //     modulesContainer: ModulesContainer(3) [Map] {
@@ -30,7 +30,7 @@ export class AppController {
   // add sum fn
   addSum(a:number,b:number): number {
       return this.appService.addSum(a,b);
-    }
+  }
 
 
   // /add route
@@ -58,11 +58,5 @@ export class AppController {
 // }
 
 // flappybird App
-@Controller()
-export class FlappyController {
 
-@Get()
-create(@Res() res:Response) {
-  return res.status(HttpStatus.BAD_REQUEST).send("BAD REQUEST!") || res.status(HttpStatus.OK).send("VALID REQUEST")
-}
-}
+
