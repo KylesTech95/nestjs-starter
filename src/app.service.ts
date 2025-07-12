@@ -12,17 +12,16 @@ export class AppService {
     // discover providers
     const providers = this.discoveryService.getProviders();
     // console.log(providers);
-    ``
     const [provider] = providers.filter(
       (item) =>
         this.discoveryService.getMetadataByDecorator(FeatureFlag, item) ===
         'experimental',
     );
 
-    console.log(
-      'Providers with the "experimental" feature flag metadata:',
-      provider,
-    );
+    // console.log(
+    //   'Providers with the "experimental" feature flag metadata:',
+    //   provider,
+    // );
 
     // discover controllers
     const controllers = this.discoveryService.getControllers()
