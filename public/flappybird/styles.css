@@ -1,3 +1,6 @@
+.z-999{
+    z-index:999;
+}
 *{
     margin:0;
     padding:0;
@@ -11,8 +14,14 @@ body{
     align-items:center;
     justify-content:center;
     height:100vh;
+    z-index: 998;
 }
 
 h1{
     color:green;
+}
+
+#canvas-id{
+    z-index:999;
+    transition:.7s
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { DiscoveryService } from '@nestjs/core';
-import { FeatureFlag } from './custom-metadata.decorator';
+import { FeatureFlag } from './lib/custom-metadata.decorator';
 import { parseCssProperty } from './lib/parseCssProperty';
+// import { customInterface } from './lib/customInterface';
 // Injectable is a provider
 @Injectable()
 @FeatureFlag('experimental')
@@ -58,26 +59,29 @@ export class FlappyService {
 
   // initialize canvas
     initalizeCanvas(height:number,width:number, options: object) : string {
-        for(let prop in options){
-          if(!options[prop]||options[prop]==undefined){
-             delete options[prop]
-          } else {
-            console.log(prop);
-            console.log(options[prop])
-          }
-        }
-        console.log(options)
-
-         // plug in height and width
-        let formatStyles: string = [...Object.keys(options)]
-          .filter(property=> options[property]!==undefined)
-          .map((key,index)=>`${parseCssProperty(key)}:${options[key]}`)
+        /*------------------------------- */
+         // foormat styles
+        let formatStyles: string = [...Object.keys(options['style'])]
+          .filter(property=> options['style'][property]!==undefined)
+          .map((key,index)=>{
+            // console.log(key)
+            // console.log(options['style'][key])
+            return `${parseCssProperty(key)}:${options['style'][key]}`
+          })
           .join(";");
-          // console.log(formatStyles)
-     
-        // let red = 'background-color:red;' // testing a random color
-        // let canvas = `<canvas height=${height} width=${width} ${options ? "style="+red : ""}></canvas>`;
-        let canvas = `<canvas height=${height} width=${width} ${options ? "style="+formatStyles : ""}></canvas>`;
+
+        // format classes
+        let formatClasses: string = options['class'] // array
+          .map((item:string,index:number)=>item)
+          .join(" ");
+
+        let canvas = `<canvas 
+                          ${options['id'] && typeof(options['id'])==='string' ? "id="+options["id"]: ""}
+                          ${options['class'] ? "class="+'"'+formatClasses + '"' : ""}
+                          ${options['style'] ? "style="+'"'+formatStyles + '"' : ""} 
+                          height=${height} width=${width}  
+                          ></canvas>`;
+
     //  return element
      return canvas;
     }
