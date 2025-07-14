@@ -1,4 +1,5 @@
-import { Module, Logger } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import {ConfigModule} from '@nestjs/config';
 import { AppService, FlappyService } from './app.service';
 import { DiscoveryModule } from '@nestjs/core';
 import * as CON from './constants'
@@ -7,6 +8,7 @@ import {ServeStaticModule} from '@nestjs/serve-static'
 /* Controllers */
 import { AppController } from './app.controller';
 import { FlappyController } from './flappybird.controller';
+
 
 
 // const constants = JSON.stringify(CON.constants);
@@ -38,9 +40,10 @@ import { FlappyController } from './flappybird.controller';
 
 // Flappybird module
 @Module({
-  imports:[DiscoveryModule, ServeStaticModule.forRoot({
-    rootPath:require('path').resolve(__dirname,'../public/flappybird')
-  })],
+  imports:[DiscoveryModule, 
+          ServeStaticModule.forRoot({rootPath:require('path').resolve(__dirname,'../public/flappybird')}),
+          // ConfigModule.forRoot({envFilePath:require('path').resolve(__dirname,'..','.env')})],
+          ConfigModule.forRoot({envFilePath:['.test.env','.env']})],
   controllers: [FlappyController],
   providers: [FlappyService]
 })

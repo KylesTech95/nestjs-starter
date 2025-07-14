@@ -21,13 +21,5 @@ function renderCanvas(canvas){
     document.body.append(section);
     const seconds = 1*.5;
     const vas = [...section.children][0];
-
-    // set timeout
-    setTimeout(()=> {
-        // enlarge canvas
-        vas.setAttribute('height','100vh')
-        vas.style.height='100vh';
-        vas.style.width='100vw';
-    },seconds*1000)
 }
 

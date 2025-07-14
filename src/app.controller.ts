@@ -13,18 +13,6 @@ export class AppController {
   @Get()
   // getHello fn
   getHello(): string {
-    // console.log(this.appService)
-    //   AppService {
-    //   discoveryService: DiscoveryService {
-    //     modulesContainer: ModulesContainer(3) [Map] {
-    //       '584cbca3254ac603f38d7' => [Module],
-    //       'ca3254ac603f38d70e704' => [Module],
-    //       '4ac603f38d70e7041079c' => [Module],
-    //       _applicationId: 'f584cbca3254ac603f38d',
-    //       InternalCoreModule: [Module]
-    //     }
-    //   }
-    // }
     return this.appService.getHello();
   }
   // add sum fn

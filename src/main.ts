@@ -1,7 +1,8 @@
-import 'dotenv/config';
+// import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import {readdirSync,appendFileSync} from 'fs'
 // import { FlappyBirdModule } from './flappybird.module';
 import {join} from 'path';
 import * as hbs from 'express-handlebars';
@@ -35,3 +36,30 @@ bootstrapApp();
 //   await app.listen(process.env.PORT||3000);
 // }
 // bootstrapFlappyBirdApp();
+
+
+
+/*---------------------------------------------*/
+// scan file system when server starts
+console.log('scanning something')
+
+async function scanDirforHiddenFiles(directory:string) {
+  const gitignore = require('path').join(__dirname,'../.gitignore')
+  // scan dir
+  const files = readdirSync(require('path').join(__dirname,directory));
+  // console.log(files)
+
+  // files that have not been ignored
+  const hiddenFiles = files.filter(x=>/^\..*\.env$/.test(x));
+  
+  console.log(hiddenFiles)
+
+  // map hidden files within gitignore
+  hiddenFiles.map(f=>appendFileSync(gitignore,"\n"+f+"\n", {encoding:'utf-8'}));
+
+  console.log('finished');
+  return;
+}
+const root = '..'
+scanDirforHiddenFiles(root);
+

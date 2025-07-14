@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DiscoveryService } from '@nestjs/core';
 import { FeatureFlag } from './lib/custom-metadata.decorator';
 import { parseCssProperty } from './lib/parseCssProperty';
+import { getCanvasElement } from './lib/elements/canvas';
 // import { customInterface } from './lib/customInterface';
 // Injectable is a provider
 @Injectable()
@@ -58,7 +59,7 @@ export class FlappyService {
   }
 
   // initialize canvas
-    initalizeCanvas(height:number,width:number, options: object) : string {
+    initalizeCanvas(height:(number|string),width:(number|string), options: object) : string {
         /*------------------------------- */
          // foormat styles
         let formatStyles: string = [...Object.keys(options['style'])]
@@ -75,12 +76,7 @@ export class FlappyService {
           .map((item:string,index:number)=>item)
           .join(" ");
 
-        let canvas = `<canvas 
-                          ${options['id'] && typeof(options['id'])==='string' ? "id="+options["id"]: ""}
-                          ${options['class'] ? "class="+'"'+formatClasses + '"' : ""}
-                          ${options['style'] ? "style="+'"'+formatStyles + '"' : ""} 
-                          height=${height} width=${width}  
-                          ></canvas>`;
+        let canvas =  getCanvasElement(height,width,options,formatClasses,formatStyles)
 
     //  return element
      return canvas;

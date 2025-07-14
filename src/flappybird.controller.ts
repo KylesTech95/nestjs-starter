@@ -12,9 +12,8 @@ constructor(private readonly flappyService: FlappyService) {}
 @Get("/canvas-init")
 @Header('Content-Type','text-html')
 initializeCanvas() : string { 
-  return this.flappyService.initalizeCanvas(350,475,{style:{backgroundColor:'red',boxShadow:"0 .5rem 12px .9px #333"},id:'canvas-id',class:['canvas-class','z-999']});
+  return this.flappyService.initalizeCanvas(750,900,{style:{backgroundColor:'rgb(237, 236, 229);',backgroundImage:'./media/flappybird-background.png',boxShadow:"0 .5rem 12px .9px #333"},id:'canvas-id',class:['canvas-class','z-999']});
 }
-
 
 // @Get() // root may override ServeStaticModule in ./app/module.ts
 // root() {
