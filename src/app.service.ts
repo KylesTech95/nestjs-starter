@@ -82,3 +82,5 @@ export class FlappyService {
      return canvas;
     }
 }
+
+

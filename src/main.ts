@@ -2,7 +2,7 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import {readdirSync,appendFileSync} from 'fs'
+import {readdirSync,appendFileSync, readFileSync} from 'fs'
 // import { FlappyBirdModule } from './flappybird.module';
 import {join} from 'path';
 import * as hbs from 'express-handlebars';
@@ -41,10 +41,10 @@ bootstrapApp();
 
 /*---------------------------------------------*/
 // scan file system when server starts
-console.log('scanning something')
 
 async function scanDirforHiddenFiles(directory:string) {
   const gitignore = require('path').join(__dirname,'../.gitignore')
+  const lines = getLines(gitignore)
   // scan dir
   const files = readdirSync(require('path').join(__dirname,directory));
   // console.log(files)
@@ -55,11 +55,26 @@ async function scanDirforHiddenFiles(directory:string) {
   console.log(hiddenFiles)
 
   // map hidden files within gitignore
-  hiddenFiles.map(f=>appendFileSync(gitignore,"\n"+f+"\n", {encoding:'utf-8'}));
-
-  console.log('finished');
+  hiddenFiles.map(f=>{
+    if(!hiddenFileExists(lines,f)){ // check if file exists
+      appendFileSync((gitignore),"\n"+f+"\n", {encoding:'utf-8'}) // append to file
+    }
+  });
   return;
 }
 const root = '..'
 scanDirforHiddenFiles(root);
 
+// check if file exists within file
+function hiddenFileExists(arr:string[],file: string){
+  return arr.includes(file) || arr.indexOf(file)!==-1
+}
+// get lines from a file
+function getLines(file:string):string[]{
+  console.log("invoked")
+ let readfile = readFileSync(file,'utf-8');
+ let lines = readfile.split("\n");
+ console.log(lines)
+ return lines;
+}
+// getLines(require('path').resolve(__dirname,'../.gitignore'));
