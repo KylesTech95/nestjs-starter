@@ -25,6 +25,7 @@ async function bootstrapApp() {
 }
 bootstrapApp();
 
+scanDirforHiddenFiles('..')
 // flappy bird
 // async function bootstrapFlappyBirdApp() {
 //   // create app with nestfactory
@@ -62,7 +63,13 @@ async function scanDirforHiddenFiles(directory:string) {
 }
 // check if file exists within file
 function hiddenFileExists(arr:string[],file: string){
-  return arr.includes(file) || arr.indexOf(file)!==-1
+  let carriage = '\r'
+  if(arr.includes(file+carriage) || arr.indexOf(file+carriage)===-1){
+    console.log('file does not exist')
+  } else {
+    console.error('file exists within .gitignore')
+  }
+  return arr.includes(file+carriage) || arr.indexOf(file+carriage)!==-1
 }
 // get lines from a file
 function getLines(file:string):string[]{
