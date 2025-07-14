@@ -40,8 +40,7 @@ bootstrapApp();
 
 
 /*---------------------------------------------*/
-// scan file system when server starts
-
+// scan root for hidden-files
 async function scanDirforHiddenFiles(directory:string) {
   const gitignore = require('path').join(__dirname,'../.gitignore')
   const lines = getLines(gitignore)
@@ -52,7 +51,6 @@ async function scanDirforHiddenFiles(directory:string) {
   // files that have not been ignored
   const hiddenFiles = files.filter(x=>/^\..*\.env$/.test(x));
   
-  console.log(hiddenFiles)
 
   // map hidden files within gitignore
   hiddenFiles.map(f=>{
@@ -62,19 +60,14 @@ async function scanDirforHiddenFiles(directory:string) {
   });
   return;
 }
-const root = '..'
-scanDirforHiddenFiles(root);
-
 // check if file exists within file
 function hiddenFileExists(arr:string[],file: string){
   return arr.includes(file) || arr.indexOf(file)!==-1
 }
 // get lines from a file
 function getLines(file:string):string[]{
-  console.log("invoked")
  let readfile = readFileSync(file,'utf-8');
  let lines = readfile.split("\n");
- console.log(lines)
  return lines;
 }
 // getLines(require('path').resolve(__dirname,'../.gitignore'));

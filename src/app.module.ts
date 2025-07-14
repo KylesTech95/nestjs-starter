@@ -42,8 +42,7 @@ import { FlappyController } from './flappybird.controller';
 @Module({
   imports:[DiscoveryModule, 
           ServeStaticModule.forRoot({rootPath:require('path').resolve(__dirname,'../public/flappybird')}),
-          // ConfigModule.forRoot({envFilePath:require('path').resolve(__dirname,'..','.env')})],
-          ConfigModule.forRoot({envFilePath:['.test.env','.env']})],
+          ConfigModule.forRoot({envFilePath:['.development.env','prod.env']})],
   controllers: [FlappyController],
   providers: [FlappyService]
 })
