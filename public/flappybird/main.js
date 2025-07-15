@@ -18,11 +18,15 @@ if(!document.querySelector('canvas')){
 function renderCanvas(canvas){
     let section = document.createElement('section');
     section.innerHTML = canvas;
+    let canvas_element = section.childNodes[0];
+
     document.body.append(section);
 
-    let boardWidth = canvas.width;
-    let boardHeight = canvas.height;
+    // board height and width
+    let boardWidth = section.width;
+    let boardHeight = section.height;
 
+    // gamestate & current state
     let GAME_STATE = {
         MENU:'menu',
         PLAYYING:'playing',
@@ -30,12 +34,15 @@ function renderCanvas(canvas){
     }
     let currentState = GAME_STATE.MENU;
 
+    // flags
     let FLAG = {
         inputLocked:false,
     }
 
+    //keydown event
     document.onkeydown = handleKeydown
 
+    // play button
     let playBtn = {
         x: boardWidth / 2 - (120/2),
         y: boardHeight / 2 - (70 /2),
@@ -43,14 +50,21 @@ function renderCanvas(canvas){
         width:70
     }
 
+    // logo info
     let logo = {
-        x: boardWidth / 2 - 300 / 2,
-        y: boardHeight / 4,
+        x: (boardWidth / 2),
+        y: boardHeight / 3,
         width:300,
         height:100
     }
-    let flappyBirdTextImg = new Img();
-    flappyBirdTextImg.src = ""
+
+    // flappybird logo
+    let flappyBirdTextImg = new Image(logo.width,logo.height);
+    flappyBirdTextImg.src = "./media/flappylogo.png";
+    
+    let gameoverImg = new Image();
+    gameoverImg.src = "./media/gameover.png";
+
 }
 
 
