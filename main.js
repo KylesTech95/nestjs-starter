@@ -110,7 +110,9 @@
 
     // flappybird logo
     let flappyBirdTextImg = new Image(logo.width,logo.height);
-    flappyBirdTextImg.src = "./media/flappylogo.png";
+    // flappyBirdTextImg.src = "./media/flappylogo.png";
+    flappyBirdTextImg.height = 350;
+    flappyBirdTextImg.src = "./media/jambirdlogo.png";
 
     // gameover
     let gameoverImg = new Image();
@@ -121,7 +123,8 @@
     playBtnImg.src = "./media/playbtn.png"
 
     const birdImg = new Image();
-    birdImg.src = './media/bird-flap-neutral.png'
+    // birdImg.src = './media/bird-flap-neutral.png'
+    birdImg.src = './media/jam-neutral.png'
 
     const topPipeImg = new Image();
     topPipeImg.src = './media/pipe-down.jpg';
@@ -187,6 +190,10 @@
             let scaledHeight = (flappyBirdTextImg.height / flappyBirdTextImg.width) * scaledWidth
             ctx.drawImage(flappyBirdTextImg,logo.x,logo.y,scaledWidth,scaledHeight)
         }
+
+        // draw flappybird img
+        ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
+        
     }
 
     function renderGame(){
@@ -283,7 +290,8 @@
             } else if(currentState === GAME_STATE.GAME_OVER){
                 resetGame();
             } else if(currentState === GAME_STATE.PLAYING){
-                birdImg.src = './media/bird-flap-up.png'
+                // birdImg.src = './media/bird-flap-up.png'
+                birdImg.src = './media/jam-up.png'
                 velocityY = -8
             }
             else {
@@ -302,7 +310,8 @@
             condition3
         ){
             if(currentState === GAME_STATE.PLAYING){
-            birdImg.src = './media/bird-flap-down.png'
+            // birdImg.src = './media/bird-flap-down.png'
+            birdImg.src = './media/jam-down.png'
         }
         }
 
