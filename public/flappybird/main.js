@@ -2,13 +2,13 @@
 // fetch canvas
 const canvasInit = '/flappy/canvas-init'
 if(!document.querySelector('canvas')){
-    console.log('canvas does not exist')
+    // console.log('canvas does not exist')
     const canvas = fetch(canvasInit, {method:'GET',header:{'Content-Type':'text/html'}}).then(r=>{
     if(r.status===200){
-        // console.log(r)
+        // // console.log(r)
         return r.text();
     } else {
-        console.log('status is bad')
+        // console.log('status is bad')
     }
 }).then(canva => renderCanvas(canva)); // fetch canvas
 }
@@ -159,7 +159,7 @@ function renderCanvas(canvas){
                 renderGameOver()
             break;
             default:
-            console.log(undefined);
+            // console.log(undefined);
         }
     }
 
@@ -178,7 +178,7 @@ function renderCanvas(canvas){
     }
 
     function renderGame(){
-        console.log("RENDER THE GAME")
+        // console.log("RENDER THE GAME")
         // ctx.drawImage(backgroundImg,0,0,boardWidth,boardHeight)
         velocityY += gravity
         // bird.y = Math.max(bird.y + velocityY,0);
@@ -192,18 +192,18 @@ function renderCanvas(canvas){
         for(let i = 0; i < pipeArray.length; i++){
             let pipe = pipeArray[i];
             pipe.x += velocityX;
-            console.log(pipe)
-            console.log(pipe.img.src)
+            // console.log(pipe)
+            // console.log(pipe.img.src)
             if(pipe.rotate===true){
-                console.log(pipe.img)
-                console.log("THIS PIPE IS FLIPPED!")
+                // console.log(pipe.img)
+                // console.log("THIS PIPE IS FLIPPED!")
                 pipe.img.classList.add('flipover');
             }
             ctx.drawImage(pipe.img,pipe.x,pipe.y,pipe.width,pipe.height);
 
             if(!pipe.passed && bird.x > pipe.x + pipe.width){
                 score += .5;
-                console.log(score)
+                // console.log(score)
                 pipe.passed = true; // pipe is passed
             }
 
@@ -248,7 +248,7 @@ function renderCanvas(canvas){
     function handleKeydown(e){
         const {inputLocked} = FLAG;
         if(inputLocked)return;
-        console.log(e.key,e.code)
+        // console.log(e.key,e.code)
         if(e.key===' ' && e.code==='Space'){
             if(currentState === GAME_STATE.MENU){
                 startGame()
@@ -259,7 +259,7 @@ function renderCanvas(canvas){
                 velocityY = -8
             }
             else {
-                console.log("underfined for keydown")
+                // console.log("underfined for keydown")
             }
         }
     }
@@ -273,7 +273,7 @@ function renderCanvas(canvas){
     }
 
     function startGame(){
-        console.log("GAME STARTED!")
+        // console.log("GAME STARTED!")
         currentState = GAME_STATE.PLAYING;
         bird.y = birdY;
         velocityY = 0;
@@ -300,13 +300,13 @@ function renderCanvas(canvas){
 
     // place the pipe
     function placePipe(){
-        console.log("placing a pipe")
+        // console.log("placing a pipe")
         createPipe();
     }
 
     // create the pipe
     function createPipe(){
-        console.log("creating a pipe")
+        // console.log("creating a pipe")
         let maxPipeHeight = boardHeight - pipeGap - 50;
         let topPipeHeight = Math.floor(Math.random()*maxPipeHeight);
         let bottomPipeHeight = boardHeight - topPipeHeight - pipeGap;
