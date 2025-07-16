@@ -246,10 +246,14 @@
     }
 
     function handleKeydown(e){
+        const [condition1,condition2,condition3] = [e.key===' ' && e.code==='Space',e.currentTarget,e.currentTarget]
         const {inputLocked} = FLAG;
         if(inputLocked)return;
         // console.log(e.key,e.code)
-        if(e.key===' ' && e.code==='Space'){
+        if( condition1 ||
+            condition2 ||
+            condition3
+        ){
             if(currentState === GAME_STATE.MENU){
                 startGame()
             } else if(currentState === GAME_STATE.GAME_OVER){
@@ -265,11 +269,19 @@
     }
 
     function handleKeyUp(e){
-        if(e.key===' ' && e.code==='Space'){
-        if(currentState === GAME_STATE.PLAYING){
+        const [condition1,condition2,condition3] = [e.key===' ' && e.code==='Space',e.currentTarget,e.currentTarget]
+        const {inputLocked} = FLAG;
+        if(inputLocked)return;
+        // console.log(e.key,e.code)
+        if( condition1 ||
+            condition2 ||
+            condition3
+        ){
+            if(currentState === GAME_STATE.PLAYING){
             birdImg.src = './media/bird-flap-down.png'
         }
         }
+        
     }
 
     function startGame(){
