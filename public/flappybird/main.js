@@ -1,22 +1,22 @@
 
 // fetch canvas
-const canvasInit = '/flappy/canvas-init'
-if(!document.querySelector('canvas')){
-    // console.log('canvas does not exist')
-    const canvas = fetch(canvasInit, {method:'GET',header:{'Content-Type':'text/html'}}).then(r=>{
-    if(r.status===200){
-        // // console.log(r)
-        return r.text();
-    } else {
-        // console.log('status is bad')
-    }
-}).then(canva => renderCanvas(canva)); // fetch canvas
-}
+// const canvasInit = '/flappy/canvas-init'
+// if(!document.querySelector('canvas')){
+//     // console.log('canvas does not exist')
+//     const canvas = fetch(canvasInit, {method:'GET',header:{'Content-Type':'text/html'}}).then(r=>{
+//     if(r.status===200){
+//         // // console.log(r)
+//         return r.text();
+//     } else {
+//         // console.log('status is bad')
+//     }
+// }).then(canva => renderCanvas(canva)); // fetch canvas
+// }
 
 
 /*-----------------------------------------------*/
 // render canvas
-function renderCanvas(canvas){
+// function renderCanvas(canvas){
 
     //keydown event
     document.onkeydown = handleKeydown
@@ -31,16 +31,16 @@ function renderCanvas(canvas){
     document.ontouchend = handleKeyUp
 
 
-    let section = document.createElement('section');
-    section.innerHTML = canvas;
-    let canvas_element = section.childNodes[0]
-    // let canvas_element = document.querySelector('canvas');
+    // let section = document.createElement('section');
+    // section.innerHTML = canvas;
+    // let canvas_element = section.childNodes[0]
+    let canvas_element = document.querySelector('canvas');
 
     document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
     // window.onresize = e => document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
 
     function mobileCanvas(){
-        canvas_element.setAttribute('width',document.body.clientWidth-100)
+        canvas_element.setAttribute('width',document.body.clientWidth-20)
         canvas_element.setAttribute('height',750)
     }
     function desktopCanvas(){
@@ -49,7 +49,7 @@ function renderCanvas(canvas){
     }
 
 
-    document.body.append(section);
+    // document.body.append(section);
 
     // board height and width
     let boardWidth = canvas_element.width;
@@ -332,4 +332,4 @@ function renderCanvas(canvas){
 
         pipeArray.push(topPipe,bottomPipe)
     }
-}
+// }
