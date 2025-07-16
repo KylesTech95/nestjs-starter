@@ -22,11 +22,32 @@ function renderCanvas(canvas){
     document.onkeydown = handleKeydown
     document.onkeyup = handleKeyUp
 
+    // click event
+    document.onmousedown = handleKeydown
+    document.onmouseup = handleKeyUp
+
+    // touch event
+    document.ontouchstart = handleKeydown
+    document.ontouchend = handleKeyUp
+
 
     let section = document.createElement('section');
     section.innerHTML = canvas;
     let canvas_element = section.childNodes[0]
     // let canvas_element = document.querySelector('canvas');
+
+    document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
+    // window.onresize = e => document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
+
+    function mobileCanvas(){
+        canvas_element.setAttribute('width',document.body.clientWidth-100)
+        canvas_element.setAttribute('height',750)
+    }
+    function desktopCanvas(){
+        canvas_element.setAttribute('width',900)
+        canvas_element.setAttribute('height',750)
+    }
+
 
     document.body.append(section);
 
@@ -45,6 +66,7 @@ function renderCanvas(canvas){
     // flags
     let FLAG = {
         inputLocked:false,
+        movingPipes:false,
     }
 
     // play button
@@ -64,7 +86,7 @@ function renderCanvas(canvas){
 
     // logo info
     let logo = {
-        x: (boardWidth / 3),
+        x: document.body.clientWidth <= 550 ? boardWidth / 2 - (300/2) : (boardWidth / 3),
         y: boardHeight / 4,
         width:300,
         height:100
@@ -88,7 +110,6 @@ function renderCanvas(canvas){
 
     const birdImg = new Image();
     birdImg.src = './media/bird-flap-neutral.png'
-    
 
     const topPipeImg = new Image();
     topPipeImg.src = './media/pipe.jpg';
@@ -112,7 +133,7 @@ function renderCanvas(canvas){
     let pipeGap = 200;
     let pipeArray = []; // store pipe for any detected collisions
     let pipeIntervalId;
-
+    let score = 0; 
  
     let board = canvas_element;
     board.height = boardHeight;
@@ -155,16 +176,13 @@ function renderCanvas(canvas){
             ctx.drawImage(flappyBirdTextImg,logo.x,logo.y,scaledWidth,scaledHeight)
         }
     }
+
     function renderGame(){
         console.log("RENDER THE GAME")
         // ctx.drawImage(backgroundImg,0,0,boardWidth,boardHeight)
         velocityY += gravity
         // bird.y = Math.max(bird.y + velocityY,0);
         bird.y = bird.y + velocityY
-
-        // ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
-        // ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
-        // ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
         ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
 
         if(bird.y > boardHeight){
@@ -179,7 +197,7 @@ function renderCanvas(canvas){
             if(pipe.rotate===true){
                 console.log(pipe.img)
                 console.log("THIS PIPE IS FLIPPED!")
-                pipe.img.classList.add('flipover')
+                pipe.img.classList.add('flipover');
             }
             ctx.drawImage(pipe.img,pipe.x,pipe.y,pipe.width,pipe.height);
 
@@ -203,6 +221,7 @@ function renderCanvas(canvas){
             ctx.fillText(score,25,40)
         }
     }
+
     function renderGameOver(){
         if(gameoverImg.complete){
             ctx.drawImage(gameoverImg,gameOver.x,gameOver.y,gameOver.width,gameOver.height)
@@ -244,6 +263,7 @@ function renderCanvas(canvas){
             }
         }
     }
+
     function handleKeyUp(e){
         if(e.key===' ' && e.code==='Space'){
         if(currentState === GAME_STATE.PLAYING){
@@ -251,7 +271,7 @@ function renderCanvas(canvas){
         }
         }
     }
-    let score = 0; 
+
     function startGame(){
         console.log("GAME STARTED!")
         currentState = GAME_STATE.PLAYING;

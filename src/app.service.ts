@@ -59,7 +59,7 @@ export class FlappyService {
   }
 
   // initialize canvas
-    initalizeCanvas(height:(number|string),width:(number|string), options: object) : string {
+    initalizeCanvas(options: object) : string {
         /*------------------------------- */
          // foormat styles
         let formatStyles: string = [...Object.keys(options['style'])]
@@ -76,7 +76,7 @@ export class FlappyService {
           .map((item:string,index:number)=>item)
           .join(" ");
 
-        let canvas =  getCanvasElement(height,width,options,formatClasses,formatStyles)
+        let canvas =  getCanvasElement(options,formatClasses,formatStyles)
 
     //  return element
      return canvas;

@@ -13,7 +13,7 @@ constructor(private readonly flappyService: FlappyService) {}
 @Get("/canvas-init")
 @Header('Content-Type','text-html')
 initializeCanvas() : string { 
-  return this.flappyService.initalizeCanvas(750,900,{
+  return this.flappyService.initalizeCanvas({
     // styles
     style:
     {
@@ -29,10 +29,6 @@ initializeCanvas() : string {
     // classes
     class:['canvas-class','z-999']});
 }
-
-
-
-
 
 
 
