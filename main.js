@@ -218,7 +218,7 @@
                 // console.log(score)
                 pipe.passed = true; // pipe is passed
                 console.log(score)
-                pipeGap = [100,125,150,200][Math.floor(Math.random()*4)] // renew pipeGap variable
+                document.body.clientWidth >= 980 ? pipeGap = [100,125,150,200][Math.floor(Math.random()*4)] : null // renew pipeGap variable
                 // score >= 3 ? pipeGap = 50 : null; // renew pipeGap variable
 
                 // increase speed every multiple of 5;
