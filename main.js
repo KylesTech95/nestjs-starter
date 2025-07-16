@@ -42,6 +42,7 @@
     // window.onresize = e => document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
 
     function mobileCanvas(){
+        console.log("MOBILE")
         pipeGap = 150;
         canvas_element.setAttribute('width',document.body.clientWidth-20)
         canvas_element.setAttribute('height',750)
@@ -52,10 +53,12 @@
         canvas_element.setAttribute('height',document.body.clientHeight-50)
     }
     function desktopCanvas(){
+        console.log("DESKTOP")
         pipeGap = 150;
         canvas_element.setAttribute('width',900)
         canvas_element.setAttribute('height',750)
     }
+
 
 
     // document.body.append(section);
@@ -108,23 +111,23 @@
     // flappybird logo
     let flappyBirdTextImg = new Image(logo.width,logo.height);
     flappyBirdTextImg.src = "./media/flappylogo.png";
-    
+
     // gameover
-    let gameoverImg = new Image(); 
+    let gameoverImg = new Image();
     gameoverImg.src = "./media/gameover.png";
 
     // playbutton
-    let playBtnImg = new Image(); 
+    let playBtnImg = new Image();
     playBtnImg.src = "./media/playbtn.png"
 
     const birdImg = new Image();
     birdImg.src = './media/bird-flap-neutral.png'
 
     const topPipeImg = new Image();
-    topPipeImg.src = './media/pipe.jpg';
+    topPipeImg.src = './media/pipe-down.jpg';
 
     const bottomPipeImg = new Image();
-    bottomPipeImg.src = './media/pipe.jpg';
+    bottomPipeImg.src = './media/pipe-up.jpg';
 
     // bird object
     const bird = {
@@ -141,15 +144,16 @@
     let pipeWidth = 100;
     let pipeArray = []; // store pipe for any detected collisions
     let pipeIntervalId;
-    let score = 0; 
- 
+    let score = 0;
+    let pipeSpeed = 2500
+
     let board = canvas_element;
     board.height = boardHeight;
     board.width = boardWidth;
     const ctx = canvas_element.getContext('2d');
 
     requestAnimationFrame(update,ctx)
-    
+
     // update fn
     function update(){
         requestAnimationFrame(update)
@@ -213,6 +217,18 @@
                 score += .5;
                 // console.log(score)
                 pipe.passed = true; // pipe is passed
+                console.log(score)
+                pipeGap = [100,125,150,200][Math.floor(Math.random()*4)] // renew pipeGap variable
+                // score >= 3 ? pipeGap = 50 : null; // renew pipeGap variable
+
+                // increase speed every multiple of 5;
+                const multiple = 3;
+                if(score >= multiple && score % multiple == 0){
+                    velocityX = velocityX - .20
+
+                }
+                
+
             }
 
             if(detectedCollision(bird,pipe)){
@@ -289,7 +305,7 @@
             birdImg.src = './media/bird-flap-down.png'
         }
         }
-        
+
     }
 
     function startGame(){
@@ -300,11 +316,12 @@
         pipeArray = [];
         score = 0;
 
+
         if (pipeIntervalId){
             clearInterval(pipeIntervalId)
         }
         placePipe();
-        pipeIntervalId = setInterval(placePipe,2500);
+        pipeIntervalId = setInterval(placePipe,pipeSpeed);
     }
 
     function resetGame(){
