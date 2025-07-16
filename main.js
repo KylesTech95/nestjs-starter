@@ -36,12 +36,16 @@
     // let canvas_element = section.childNodes[0]
     let canvas_element = document.querySelector('canvas');
 
-    document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
+    document.body.clientWidth <= 550 ? mobileCanvas() : document.body.clientWidth > 550 && document.body.clientWidth <= 1010 && document.body.clientHeight <= 400 ? mobileLandscapeCanvas() : desktopCanvas();
     // window.onresize = e => document.body.clientWidth <= 550 ? mobileCanvas() : desktopCanvas();
 
     function mobileCanvas(){
         canvas_element.setAttribute('width',document.body.clientWidth-20)
         canvas_element.setAttribute('height',750)
+    }
+    function mobileLandscapeCanvas(){
+        canvas_element.setAttribute('width',document.body.clientWidth-20)
+        canvas_element.setAttribute('height',document.body.clientHeight-35)
     }
     function desktopCanvas(){
         canvas_element.setAttribute('width',900)
