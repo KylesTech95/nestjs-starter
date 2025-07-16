@@ -244,7 +244,7 @@ function renderCanvas(canvas){
             }
         }
     }
-    function handleKeyUp(e)
+    function handleKeyUp(e){
         if(e.key===' ' && e.code==='Space'){
         if(currentState === GAME_STATE.PLAYING){
             birdImg.src = './media/bird-flap-down.png'
