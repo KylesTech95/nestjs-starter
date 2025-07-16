@@ -2,19 +2,22 @@ const { Jimp } = require('jimp');
 const sharp = require('sharp')
 const path = require('path')
 // const [input,output] = ['input.jpg','output.png'] // input file (jpg) and output file (png)
-const [input,output] = ['input/gameover.webp','output/gameover.png'] // input file (png) and output file (jpeg)
+const [input,output] = ['input/bird.png','output/bird.png'] // input file (png) and output file (jpeg)
 const fs = require('fs');
 
 
 // convert('..',input,output,'..')
-convertWebpToPng(path.resolve(__dirname,'..',input),path.resolve(__dirname,'..',output))
-
+// convertWebpToPng(path.resolve(__dirname,'..',input),path.resolve(__dirname,'..',output))
+// convert('../input','pipe.png','pipe.jpg','../output',{width:120,height:650})
+convert('../input','bird.png','bird-flap-down.png','../output',{x:0,y:0,h:63,w:90,height:100,width:100})
+convert('../input','bird.png','bird-flap-neutral.png','../output',{x:90,y:0,h:63,w:90,height:100,width:100})
+convert('../input','bird.png','bird-flap-up.png','../output',{x:180,y:0,h:63,w:90,height:100,width:100})
 
 
 /*-----------------------------*/
 // convert jpg to png
-async function convert(directory,input,output,outDir,options={height:undefined,width:undefined}){
-    let { height,width } = options
+async function convert(directory,input,output,outDir,options={height:undefined,width:undefined,x:undefined,y:undefined,h:undefined,w:undefined}){
+    let { height,width, x,y,h,w } = options
     // get absolute path
     input = path.resolve(__dirname,directory,input) // going to directory from this file's directory (__dirname)
     // jimp reads input file and stores in image
@@ -23,8 +26,8 @@ async function convert(directory,input,output,outDir,options={height:undefined,w
     // edit the image here (crop,resize,etc...)
   /*----------------------------------------*/  
 //   console.log(image)
+    x>=0&&y>=0&&h&&w ? image.crop({x:x,y:y,w:w,h:h}) : null;
     height && width ? image.resize({w:width,h:height}) : null
-    //.crop({x:10,y:10,h:150,w:150})
   /*----------------------------------------*/  
 
     // check if filename is the same

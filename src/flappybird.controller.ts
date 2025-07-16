@@ -18,7 +18,7 @@ initializeCanvas() : string {
     style:
     {
       backgroundColor:'rgb(237, 236, 229);',
-      backgroundImage:"url('./media/flappybird-background.png')",
+      // backgroundImage:"url('./media/flappybird-background.png')",
       backgroundPosition:'center',
       backgroundRepeat:'no-repeat',
       backgroundSize:'contain',
