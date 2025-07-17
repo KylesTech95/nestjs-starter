@@ -148,7 +148,7 @@
     let pipeArray = []; // store pipe for any detected collisions
     let pipeIntervalId;
     let score = 0;
-    let pipeSpeed = 2500
+    let pipeSpeed = 4000 // slow speed
 
     let board = canvas_element;
     board.height = boardHeight;
@@ -232,22 +232,15 @@
                 // score >= 3 ? pipeGap = 50 : null; // renew pipeGap variable
 
                 // increase speed every multiple of 5;
-                const multiple = 3;
+                const multiple = 5;
                 if(score >= multiple && score % multiple == 0){
-                    velocityX = velocityX - .20
-
-                }
-                
-
+                    velocityX = velocityX - .20;
+                } 
             }
 
             if(detectedCollision(bird,pipe)){
                 currentState = GAME_STATE.GAME_OVER
             }
-
-            // while(pipeArray.length > 0 && pipeArray[0].x < -pipeWidth){
-            //     pipeArray.shift()
-            // }
 
             ctx.fillStyle = '#f00';
             ctx.font = "45px sans-serif"
