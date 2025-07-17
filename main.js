@@ -43,18 +43,18 @@
 
     function mobileCanvas(){
         console.log("MOBILE")
-        pipeGap = 150;
+        pipeGap = 220;
         canvas_element.setAttribute('width',document.body.clientWidth-20)
         canvas_element.setAttribute('height',750)
     }
     function mobileLandscapeCanvas(){
-        pipeGap = 150;
+        pipeGap = 220;
         canvas_element.setAttribute('width',document.body.clientWidth-20)
         canvas_element.setAttribute('height',document.body.clientHeight-50)
     }
     function desktopCanvas(){
         console.log("DESKTOP")
-        pipeGap = 150;
+        pipeGap = 220;
         canvas_element.setAttribute('width',900)
         canvas_element.setAttribute('height',750)
     }
@@ -98,7 +98,7 @@
 
     // logo info
     let logo = {
-        x: document.body.clientWidth <= 550 ? boardWidth / 2 - (300/2) : (boardWidth / 3),
+        x: document.body.clientWidth <= 550 ? boardWidth / 2 - (300/2) : (boardWidth / 3.5),
         y: boardHeight / 4,
         width:300,
         height:100
@@ -141,7 +141,7 @@
     }
 
     let velocityY;
-    let velocityX = -2;
+    let velocityX = -1.6;
     let gravity = 0.5;
     let birdY = boardHeight / 2;
     let pipeWidth = 100;
@@ -197,6 +197,9 @@
     }
 
     function renderGame(){
+
+            ctx.drawImage(flappyBirdTextImg,logo.x,-10,logo.width,logo.height+100)
+
         // console.log("RENDER THE GAME")
         // ctx.drawImage(backgroundImg,0,0,boardWidth,boardHeight)
         velocityY += gravity
@@ -225,7 +228,7 @@
                 // console.log(score)
                 pipe.passed = true; // pipe is passed
                 console.log(score)
-                document.body.clientWidth >= 980 ? pipeGap = [100,125,150,200][Math.floor(Math.random()*4)] : null // renew pipeGap variable
+                document.body.clientWidth >= 980 ? pipeGap = [220,190,210,200][Math.floor(Math.random()*4)] : null // renew pipeGap variable
                 // score >= 3 ? pipeGap = 50 : null; // renew pipeGap variable
 
                 // increase speed every multiple of 5;
